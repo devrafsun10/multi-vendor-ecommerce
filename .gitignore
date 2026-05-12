@@ -1,0 +1,50 @@
+# Dependency directories (never commit these)
+node_modules/
+jspm_packages/
+web_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables and secrets (critical security risk)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+# Build outputs and compilation artifacts
+dist/
+build/
+out/
+.next/
+.nuxt/
+.cache/
+.parcel-cache/
+
+# Testing and coverage outputs
+coverage/
+.nyc_output/
+
+# IDE, editors, and system files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
+
+# Diagnostic logs and runtimes
+pids
+*.pid
+*.seed
+*.pid.lock
