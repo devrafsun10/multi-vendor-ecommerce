@@ -1,6 +1,9 @@
 const User = require('../models/user')
+const VerificationToken = require('../models/verificationToken')
 const jwt = require('jsonwebtoken')
 const {validationResult} = require('express-validator')
+const nodemailer = require('nodemailer')
+const {v4: uuidv4} = require('uuid')
 
 exports.register = async (req,res) => {
     try {
@@ -35,6 +38,8 @@ exports.register = async (req,res) => {
 
         //save user to database
         await user.save()
+
+
 
         res.status(201).json({
             success: true,
