@@ -179,3 +179,55 @@ exports.login = async (req,res) => {
         })
     }
 }
+
+exports.refreshToken = async (req,res) => {
+    try {
+        const refreshToken = req.cookies.refreshToken
+        if(!refreshToken) {
+            return res.status(401).json({
+                success: false,
+                message: "No refresh token provided"
+            })
+
+            //find user with the refresh token
+            const user = await User.findOne({
+                refreshTokens: { $elemMatch: { token: refreswhToken}}
+            })
+
+            if(!user) {
+                res.clearCookie('refreshToken')
+                return res.status(403).json({
+                    message: "Invalid refresh token"
+                })
+            }
+
+            //verify refresh token
+            jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET, async (err,decoded)=> {
+                if(err) {
+                    res.clearCookie('refreshToken')
+                return res.status(403).json({
+                    message: "Invalid or expired refresh token"
+                }) 
+                }
+
+                const newAccessToken = jwt.sign({
+                    id: user._id,
+                    role: user.role,
+                    email: user.email
+                },
+                 process.env.JWT_ACCESS_SECRET,
+            { expiresIn: process.env.ACCESS_TOKEN_EXPIRY})
+
+            res.status(200).json({
+                success: true,
+                accessToken: newAccessToken,
+            })
+            })
+        }       
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Internal server error"
+        })
+    }
+}
