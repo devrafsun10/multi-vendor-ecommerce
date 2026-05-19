@@ -2,7 +2,7 @@ const { version } = require('mongoose');
 const swaggerJsdoc = require('swagger-jsdoc');
 
 const options = {
-    defination: {
+    definition: {
         openapi: '3.0.0',
         info : {
             title : 'Multivendor Ecommerce API',
@@ -11,8 +11,8 @@ const options = {
 
         },
         contact: {
-            name: ' Syed Rafsun Iyajdani Siyam ',
-            email: "ssiyam152@gmail.com",
+            name:  'Syed Rafsun Iyajdani Siyam',
+            email: 'ssiyam152@gmail.com',
         },
         servers: [
             {

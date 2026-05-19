@@ -5,6 +5,8 @@ const cors = require('cors')
 const cokkieParser = require('cookie-parser')
 
 const authRoutes = require( './routes/auth')
+const swaggerUi = require('swagger-ui-express')
+const swaggerSpecs = require('./config/swagger')
 
 const app = express()
 
@@ -15,6 +17,7 @@ app.use(cors({
     credentials: true
 }))
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs))
 app.use(cokkieParser())
 
 //routes
